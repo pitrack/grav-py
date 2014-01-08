@@ -9,7 +9,11 @@ Most of it will be implemented with pygame
 
 progress meter:
 i) create canvas that can draw things, circles with pos/vel/acc attributes (in addition to color/size/mass)  - DONE
-ii) allow mouse to control initial acceleration, simulate movement 
-iii) simulate physics (gravitational attraction)
+
+ii) allow mouse to control initial acceleration/velocity, simulate movement - DONE
+
+iii) simulate physics (gravitational attraction) - DONE
+
 iv) create levels
-v) polish
+
+v) "polish"
