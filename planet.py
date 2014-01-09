@@ -44,13 +44,14 @@ class Planet:
             tupleList = map(self.calcAcc, level.existing)
             (good, self.acc) = reduce(lambda (a, x),(b,y):
                                  ((a and b), (x[0] + y[0], x[1]+y[1]))
-                          , tupleList)
+                          , tupleList, (True, (0,0)))
             if not good:
                 return -1
             self.vel = (xv0 + xa0*time, yv0+ya0*time)
             self.pos = (xp0 + xv0*time, yp0+yv0*time)
         return 0
            
+
 
     # calcAcc: self * planet -> (bool, (float, float))
     # calcAcc(x,y) calculates the acceleration of x due to y.
@@ -75,10 +76,11 @@ class Planet:
 class Level:
     # init: inputs are background color, planet list, int
     # initializes variables
-    def __init__(self, color, existing, num, goal):
+    def __init__(self, color, existing, num, start, goal):
         self.color = color
         self.existing = existing
         self.num = num
+        self.start = start
         self.goal = goal   # type pygame.Rect
     
 
@@ -89,10 +91,9 @@ class Level:
     # drawLevel: draws all the planets in the planet list
     def drawLevel(self, screen):
         screen.fill(self.color)
-        pygame.draw.rect(screen, (0,0,0), self.goal, 1)
+        pygame.draw.rect(screen, (0,0,0), self.goal, 3)
         for i in self.existing:
             i.draw(screen)
-
     #inGoal: determine if a particular point is in the goal
     def inGoal(self, pos):
         return (self.goal[0] <= pos[0] and self.goal[0]+self.goal[2] >= pos[0]
